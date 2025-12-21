@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bwa46sm0td6u7"]
+
+[ext_resource type="Script" uid="uid://dftd68fyq53ml" path="res://Scripts/Player/Player.cs" id="1_nn08x"]
+[ext_resource type="Script" uid="uid://dhxgsdjg8r2vs" path="res://Scripts/Player/PlayerCompoents/PlayerInteraction.cs" id="2_kpjcp"]
+[ext_resource type="Script" uid="uid://b5vx311oyjhrm" path="res://Scripts/Player/PlayerCompoents/PlayerInventory.cs" id="4_cxr5p"]
+[ext_resource type="Script" uid="uid://b54fa5fqrb45u" path="res://Scripts/Inventory/Inventory.cs" id="5_tdg3f"]
+[ext_resource type="Script" uid="uid://bp24b3b4m8ldo" path="res://Scripts/Player/PlayerCompoents/Stats/PlayerStatHolder.cs" id="6_tdg3f"]
+[ext_resource type="Script" uid="uid://cl5ukekkp8oh0" path="res://Scripts/Player/PlayerCompoents/FPSController.cs" id="7_52ee3"]
+[ext_resource type="Script" uid="uid://3xiv56vkfxl8" path="res://Scripts/Player/PlayerCompoents/Stats/Stat.cs" id="7_dtqjt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpjcp"]
+
+[sub_resource type="Resource" id="Resource_dtqjt"]
+script = ExtResource("5_tdg3f")
+metadata/_custom_type_script = "uid://b54fa5fqrb45u"
+
+[sub_resource type="Resource" id="Resource_5ncpa"]
+script = ExtResource("7_dtqjt")
+currentValue = 100.0
+range = Vector2i(0, 100)
+signalOnMin = true
+metadata/_custom_type_script = "uid://3xiv56vkfxl8"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kne1u"]
+
+[node name="Player" type="CharacterBody3D" unique_id=784621235]
+script = ExtResource("1_nn08x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1195193837]
+shape = SubResource("CapsuleShape3D_kpjcp")
+
+[node name="PlayerInteraction" type="Node3D" parent="." unique_id=1970619532 node_paths=PackedStringArray("raycastOrigin", "holdPosition", "parentPlayer")]
+script = ExtResource("2_kpjcp")
+raycastOrigin = NodePath("../Visual/HeadPivot/Camera3D")
+holdPosition = NodePath("../Visual/HeadPivot/Hold Position")
+parentPlayer = NodePath("..")
+metadata/_custom_type_script = "uid://dhxgsdjg8r2vs"
+
+[node name="PlayerInventory" type="Node3D" parent="." unique_id=1032175699 node_paths=PackedStringArray("parentPlayer")]
+script = ExtResource("4_cxr5p")
+mainInventory = SubResource("Resource_dtqjt")
+parentPlayer = NodePath("..")
+metadata/_custom_type_script = "uid://b5vx311oyjhrm"
+
+[node name="PlayerStatHolder" type="Node3D" parent="." unique_id=558677624 node_paths=PackedStringArray("parentPlayer")]
+script = ExtResource("6_tdg3f")
+stats = Dictionary[int, Object]({
+0: SubResource("Resource_5ncpa")
+})
+parentPlayer = NodePath("..")
+metadata/_custom_type_script = "uid://bp24b3b4m8ldo"
+
+[node name="FPSController" type="Node3D" parent="." unique_id=1288462412 node_paths=PackedStringArray("_headPivot", "_camera", "parentPlayer") groups=["Player"]]
+script = ExtResource("7_52ee3")
+_headPivot = NodePath("../Visual/HeadPivot")
+_camera = NodePath("../Visual/HeadPivot/Camera3D")
+parentPlayer = NodePath("..")
+
+[node name="Visual" type="MeshInstance3D" parent="." unique_id=1604631437]
+mesh = SubResource("CapsuleMesh_kne1u")
+
+[node name="HeadPivot" type="Node3D" parent="Visual" unique_id=1256657504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8756776, 0)
+
+[node name="Hold Position" type="Node3D" parent="Visual/HeadPivot" unique_id=191797263]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.59632295, -2.1593146)
+
+[node name="Camera3D" type="Camera3D" parent="Visual/HeadPivot" unique_id=630094202]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20857906, 0)

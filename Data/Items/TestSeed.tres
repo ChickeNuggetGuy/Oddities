@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://ccme8kk4b3uxn"]
+
+[ext_resource type="Texture2D" uid="uid://cpunqgxyyosbn" path="res://AspriteFiles/Grass.png" id="1_m5vps"]
+[ext_resource type="Script" uid="uid://cbhbw1mo7gw3t" path="res://Scripts/Inventory/ItemComponents/ItemComponent.cs" id="1_v35wl"]
+[ext_resource type="Script" uid="uid://b60w6dsk03gfi" path="res://Scripts/Inventory/ItemComponents/InteractalbleComponent.cs" id="2_b5fe1"]
+[ext_resource type="Script" uid="uid://ds4x5awu1vafj" path="res://Scripts/Inventory/ItemData.cs" id="2_cdvdn"]
+[ext_resource type="Script" uid="uid://biqueljebpsgv" path="res://Scripts/Inventory/ItemComponents/PlantableComponent.cs" id="3_b5fe1"]
+
+[sub_resource type="Resource" id="Resource_m5vps"]
+script = ExtResource("2_b5fe1")
+metadata/_custom_type_script = "uid://b60w6dsk03gfi"
+
+[sub_resource type="Resource" id="Resource_q6t48"]
+script = ExtResource("3_b5fe1")
+metadata/_custom_type_script = "uid://biqueljebpsgv"
+
+[resource]
+script = ExtResource("2_cdvdn")
+ItemName = "Seed"
+ItemIcon = ExtResource("1_m5vps")
+components = Array[ExtResource("1_v35wl")]([SubResource("Resource_m5vps"), SubResource("Resource_q6t48")])
+metadata/_custom_type_script = "uid://ds4x5awu1vafj"

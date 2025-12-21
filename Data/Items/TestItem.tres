@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://h4yp0s4ajksh"]
+
+[ext_resource type="Script" uid="uid://cbhbw1mo7gw3t" path="res://Scripts/Inventory/ItemComponents/ItemComponent.cs" id="1_8fx0k"]
+[ext_resource type="Texture2D" uid="uid://w21q60mn4kru" path="res://icon.svg" id="1_qct33"]
+[ext_resource type="Script" uid="uid://ds4x5awu1vafj" path="res://Scripts/Inventory/ItemData.cs" id="2_qct33"]
+[ext_resource type="Script" uid="uid://b60w6dsk03gfi" path="res://Scripts/Inventory/ItemComponents/InteractalbleComponent.cs" id="3_3n6qk"]
+[ext_resource type="Script" uid="uid://c830in20juadd" path="res://Scripts/Inventory/ItemComponents/StatAffectedComponent.cs" id="4_14h5b"]
+
+[sub_resource type="Resource" id="Resource_14h5b"]
+script = ExtResource("3_3n6qk")
+metadata/_custom_type_script = "uid://b60w6dsk03gfi"
+
+[sub_resource type="Resource" id="Resource_q3em7"]
+script = ExtResource("4_14h5b")
+statValues = Dictionary[int, float]({
+0: -20.0
+})
+metadata/_custom_type_script = "uid://c830in20juadd"
+
+[resource]
+script = ExtResource("2_qct33")
+ItemName = "Test Item"
+ItemDescription = "Test Item for testing"
+ItemIcon = ExtResource("1_qct33")
+maxStackSize = 10
+components = Array[ExtResource("1_8fx0k")]([SubResource("Resource_14h5b"), SubResource("Resource_q3em7")])
+metadata/_custom_type_script = "uid://ds4x5awu1vafj"

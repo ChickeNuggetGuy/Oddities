@@ -1,0 +1,49 @@
+[gd_scene format=4 uid="uid://dqrqc7ea3cm4q"]
+
+[ext_resource type="Script" uid="uid://cm0qpqxnjixcw" path="res://Scripts/Inventory/WorldItem.cs" id="1_w8eyj"]
+[ext_resource type="Texture2D" uid="uid://w21q60mn4kru" path="res://icon.svg" id="2_j8xbc"]
+[ext_resource type="Script" uid="uid://cbhbw1mo7gw3t" path="res://Scripts/Inventory/ItemComponents/ItemComponent.cs" id="3_j8mlb"]
+[ext_resource type="Script" uid="uid://b60w6dsk03gfi" path="res://Scripts/Inventory/ItemComponents/InteractalbleComponent.cs" id="4_cu8wk"]
+[ext_resource type="Script" uid="uid://ds4x5awu1vafj" path="res://Scripts/Inventory/ItemData.cs" id="5_g6t3o"]
+
+[sub_resource type="Resource" id="Resource_14h5b"]
+script = ExtResource("4_cu8wk")
+metadata/_custom_type_script = "uid://b60w6dsk03gfi"
+
+[sub_resource type="Resource" id="Resource_da0k3"]
+script = ExtResource("5_g6t3o")
+ItemName = "Test Item"
+ItemDescription = "Test Item for testing"
+ItemIcon = ExtResource("2_j8xbc")
+maxStackSize = 10
+components = Array[ExtResource("3_j8mlb")]([SubResource("Resource_14h5b")])
+metadata/_custom_type_script = "uid://ds4x5awu1vafj"
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_w8eyj"]
+_surfaces = [{
+"aabb": AABB(-0.25, -0.25, -0.25, 0.5, 0.5, 0.5),
+"attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AACAvgAAgL4AAIA+AACAvgAAgL4AAIC+AACAvgAAgD4AAIC+AACAPgAAgL4AAIC+AACAvgAAgL4AAIC+AACAvgAAgL4AAIA+AACAvgAAgD4AAIC+AACAvgAAgL4AAIC+AACAPgAAgL4AAIC+AACAvgAAgD4AAIC+AACAvgAAgD4AAIA+AACAvgAAgL4AAIA+AACAvgAAgL4AAIA+AACAvgAAgD4AAIA+AACAPgAAgD4AAIA+AACAPgAAgD4AAIA+AACAvgAAgD4AAIA+AACAvgAAgD4AAIC+AACAvgAAgL4AAIA+AACAPgAAgL4AAIA+AACAPgAAgL4AAIC+AACAPgAAgD4AAIA+AACAPgAAgL4AAIA+AACAvgAAgL4AAIA+AACAPgAAgL4AAIC+AACAPgAAgL4AAIA+AACAPgAAgD4AAIA+AACAPgAAgL4AAIC+AACAPgAAgD4AAIC+AACAvgAAgD4AAIC+AACAvgAAgD4AAIC+AACAPgAAgD4AAIC+AACAPgAAgD4AAIA+AACAPgAAgD4AAIA+AACAPgAAgD4AAIC+AACAPgAAgL4AAIC+AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8xbc"]
+albedo_color = Color(1, 0.5372549, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w8eyj"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="TestItem" type="RigidBody3D" unique_id=1639768547]
+script = ExtResource("1_w8eyj")
+itemData = SubResource("Resource_da0k3")
+metadata/_custom_type_script = "uid://cm0qpqxnjixcw"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1546612012]
+mesh = SubResource("ArrayMesh_w8eyj")
+surface_material_override/0 = SubResource("StandardMaterial3D_j8xbc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=791277547]
+shape = SubResource("BoxShape3D_w8eyj")
