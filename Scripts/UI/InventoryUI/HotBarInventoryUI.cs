@@ -109,7 +109,7 @@ public partial class HotBarInventoryUI : UIWindow
 			ItemSlot slot = itemSlotScene.Instantiate<ItemSlot>();
 			slotHolder.AddChild(slot);
 			itemSlots[i] = slot;
-			slot.SetCurrentItem(null);
+			slot.SetCurrentItem(null, 0);
             
 			// Set initial visual state for selection
 			slot.slotButton.Flat = (i == selectedSlotIndex);
@@ -179,7 +179,7 @@ public partial class HotBarInventoryUI : UIWindow
 		// Reset all slots to null first to handle removed items
 		for (int i = 0; i < itemSlots.Length; i++)
 		{
-			itemSlots[i].SetCurrentItem(null);
+			itemSlots[i].SetCurrentItem(null,0);
 		}
 
 		int index = 0;
@@ -189,11 +189,11 @@ public partial class HotBarInventoryUI : UIWindow
 			
 			if (InventoryManager.Instance.TryGetItemByName(inventoryItem.Key, out var itemData))
 			{
-				itemSlots[index].SetCurrentItem(itemData);
+				itemSlots[index].SetCurrentItem(itemData, inventoryItem.Value);
 			}
 			else
 			{
-				itemSlots[index].SetCurrentItem(null);
+				itemSlots[index].SetCurrentItem(null, 0);
 			}
 			
 			index++;
@@ -201,7 +201,7 @@ public partial class HotBarInventoryUI : UIWindow
 	}
 
 
-	public void UpdateorCreateItemSlot(ItemData item, int slotIndex)
+	public void UpdateorCreateItemSlot(ItemData item, int count, int slotIndex)
 	{
 		ItemSlot slot = itemSlotScene.Instantiate() as ItemSlot;
 
@@ -212,6 +212,6 @@ public partial class HotBarInventoryUI : UIWindow
 		}
 		itemSlots[slotIndex] = slot;
 		slotHolder.AddChild(slot);
-		slot.SetCurrentItem(item);
+		slot.SetCurrentItem(item, count);
 	}
 }

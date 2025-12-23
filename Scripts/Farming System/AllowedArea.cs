@@ -131,4 +131,19 @@ public partial class AllowedArea : Node3D
 
 	    return nearest;
     }
+    
+    public Vector3? GetNearestSpot(Vector3 globalPosition, float maxDistance = 1.5f)
+    {
+	    var nearest = validPoints
+		    .OrderBy(p => p.DistanceTo(globalPosition))
+		    .Cast<Vector3?>()
+		    .FirstOrDefault();
+
+	    if (nearest.HasValue && nearest.Value.DistanceTo(globalPosition) > maxDistance)
+		    return null;
+
+	    return nearest;
+    }
+    
+    public Dictionary<Vector3, Node3D> GetOccupiedSpots() => occupiedSpots;
 }

@@ -11,6 +11,11 @@ public partial class StatAffectedComponent : ItemComponent
 		
 	}
 
+	public override void Terminate()
+	{
+		
+	}
+
 
 	public void AffectStats(Player player)
 	{

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://lxvke6coyes4" path="res://Scripts/UI/InventoryUI/ItemSlot.cs" id="1_pb2la"]
 [ext_resource type="Texture2D" uid="uid://j7mqelexjo" path="res://AspriteFiles/Border.png" id="2_i53lo"]
 
-[node name="ItemSlot" type="Control" unique_id=1607289346 node_paths=PackedStringArray("slotButton", "itemIcon", "borderImage")]
+[node name="ItemSlot" type="Control" unique_id=1607289346 node_paths=PackedStringArray("slotButton", "itemIcon", "borderImage", "countLabel")]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 3
@@ -12,6 +12,7 @@ script = ExtResource("1_pb2la")
 slotButton = NodePath("AspectRatioContainer/Button")
 itemIcon = NodePath("AspectRatioContainer/Button/ItemIcon")
 borderImage = NodePath("AspectRatioContainer/Button/Border")
+countLabel = NodePath("AspectRatioContainer/Button/Label")
 metadata/_custom_type_script = "uid://lxvke6coyes4"
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=1716715203]
@@ -56,3 +57,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 2
+
+[node name="Label" type="Label" parent="AspectRatioContainer/Button" unique_id=516140137]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -37.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "1"
+horizontal_alignment = 1

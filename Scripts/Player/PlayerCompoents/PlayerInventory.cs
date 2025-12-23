@@ -19,14 +19,13 @@ public partial class PlayerInventory : PlayerComponent
 
 		if (@event is InputEventMouseButton mouseEvent)
 		{
-			// ONLY proceed if the button was just pressed, not released
 			if (mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.Pressed)
 			{
 				if (parentPlayer.CurrentAreas.Count > 0)
 				{
 					if (!parentPlayer.TryGetPlayerComponent<PlayerInteraction>(out var playerInteraction)) return;
 
-					// Perform the raycast ONCE outside the loop for efficiency
+					// Perform the raycast once
 					var result = playerInteraction.PerformRaycast(10);
 					if (!result.TryGetValue("position", out var position)) return;
 					Vector3 hitPos = (Vector3)position;
@@ -40,8 +39,7 @@ public partial class PlayerInventory : PlayerComponent
 
 						if (nearestAvailable.HasValue)
 						{
-							farmingArea.PlantAtSpot(nearestAvailable.Value,
-								InventoryManager.InstantiateWorldItem(itemData, 1));
+							farmingArea.PlantAtSpot(nearestAvailable.Value, itemData);
 							
 							mainInventory.TryRemoveItem(itemData);
 							break;
@@ -51,7 +49,6 @@ public partial class PlayerInventory : PlayerComponent
 			}
 			else if (mouseEvent.ButtonIndex == MouseButton.Right && mouseEvent.Pressed)
 			{
-				// Use Item logic...
 				if (!itemData.TryGetItemComponent<InteractalbleComponent>(out var interactableComponent)) return;
 				interactableComponent.Interact(parentPlayer, itemData);
 			}

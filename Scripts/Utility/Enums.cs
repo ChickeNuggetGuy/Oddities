@@ -8,7 +8,8 @@ public partial class Enums
 		PICKUP,
 		USE,
 		DELETE,
-		HOLD
+		HOLD,
+		HARVEST
 	}
 	
 	public enum StatType

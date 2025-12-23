@@ -10,7 +10,15 @@ public abstract partial class ItemComponent : Resource
 	public void InitializeCall(WorldItem parent)
 	{
 		ParentWorldItem = parent;
+		Initialize();
 	}
 	
 	public abstract void Initialize();
+
+	
+	public void TerminateCall(WorldItem parent)
+	{
+		Terminate();
+	}
+	public abstract void Terminate();
 }

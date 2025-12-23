@@ -7,6 +7,7 @@ public partial class InventoryManager : Manager<InventoryManager>
 {
     // Define the path where your ItemData resources are stored
     private const string ItemsPath = "res://Data/Items/";
+    [Export] private PackedScene itemScene;
 
     public Dictionary<int, ItemData> ItemDatabase { get; private set; } =
         new Dictionary<int, ItemData>();
@@ -61,13 +62,18 @@ public partial class InventoryManager : Manager<InventoryManager>
         }
         
         int itemIndex = GD.RandRange(0, ItemDatabase.Count - 1);
-        itemData = ItemDatabase[itemIndex];
+        itemData = (ItemData)ItemDatabase[itemIndex].Duplicate(true);
+
+
         return itemData != null;
     }
 
-    public static WorldItem InstantiateWorldItem(ItemData itemData, int count)
+    public WorldItem InstantiateWorldItem(ItemData itemData, int count)
     {
-        WorldItem retVal = new WorldItem(itemData, count);
+	    ItemData item = (ItemData)itemData.Duplicate(true);
+	    WorldItem retVal = itemScene.Instantiate() as WorldItem;
+	    retVal.itemData = item;
+        retVal.Initialize();
         return retVal;
     }
 
@@ -83,7 +89,7 @@ public partial class InventoryManager : Manager<InventoryManager>
         {
             if (item.ItemName == name)
             {
-                itemData = item;
+                itemData = (ItemData)item.Duplicate(true);
                 return true;
             }
         }

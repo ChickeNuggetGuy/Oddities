@@ -9,11 +9,12 @@ public partial class ItemData : Resource
 	[Export] public string ItemDescription = "";
 	[Export] public Texture2D ItemIcon;
 	[Export] public int itemID = 0;
+
+	[Export] public Mesh itemMesh;
 	
 	[Export] public int maxStackSize = 1;
 	[Export(PropertyHint.ResourceType, "ItemComponent")] public Array<ItemComponent>  components = new Array<ItemComponent>();
-
-
+	
 
 	public bool TryGetItemComponent<T>(out T itemComponent) where T : ItemComponent
 	{

@@ -23,7 +23,7 @@ metadata/_custom_type_script = "uid://3xiv56vkfxl8"
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kne1u"]
 
-[node name="Player" type="CharacterBody3D" unique_id=784621235]
+[node name="Player" type="CharacterBody3D" unique_id=784621235 groups=["Player"]]
 script = ExtResource("1_nn08x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1195193837]
