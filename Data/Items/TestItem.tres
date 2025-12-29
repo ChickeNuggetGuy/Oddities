@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://ds4x5awu1vafj" path="res://Scripts/Inventory/ItemData.cs" id="2_qct33"]
 [ext_resource type="Script" uid="uid://b60w6dsk03gfi" path="res://Scripts/Inventory/ItemComponents/InteractalbleComponent.cs" id="3_3n6qk"]
 [ext_resource type="Script" uid="uid://c830in20juadd" path="res://Scripts/Inventory/ItemComponents/StatAffectedComponent.cs" id="4_14h5b"]
+[ext_resource type="ArrayMesh" uid="uid://bjeute2tmsjqc" path="res://Meshes/GrowthStage3_Sphere_004.res" id="5_q3em7"]
 
 [sub_resource type="Resource" id="Resource_14h5b"]
 script = ExtResource("3_3n6qk")
@@ -22,6 +23,7 @@ script = ExtResource("2_qct33")
 ItemName = "Test Item"
 ItemDescription = "Test Item for testing"
 ItemIcon = ExtResource("1_qct33")
+itemMesh = ExtResource("5_q3em7")
 maxStackSize = 10
 components = Array[ExtResource("1_8fx0k")]([SubResource("Resource_14h5b"), SubResource("Resource_q3em7")])
 metadata/_custom_type_script = "uid://ds4x5awu1vafj"

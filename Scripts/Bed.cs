@@ -25,7 +25,7 @@ public partial class Bed : Node3D
 
 		if (body.IsInGroup("Player"))
 		{
-			DayManager.Instance.TryAdvanceDay();
+			DayManager.Instance.StartNextDay();
 		}
 	}
 }

@@ -74,26 +74,29 @@ public partial class WorldItem : RigidBody3D
 			interactable.Interact(player, this);
 		}
 	}
-
-	// Keep your Pickup/GiveItem logic as is, it handles the UI and signals perfectly
-	public virtual void Pickup(Player player, ItemData dataToGive)
+	
+	public bool TryGiveItemToPlayer(Player player,ItemData data, int amount = -1)
 	{
-		GiveItemToPlayer(player, dataToGive);
-	}
-
-	private void GiveItemToPlayer(Player player,ItemData data)
-	{
-		if (!player.TryGetPlayerComponent<PlayerInventory>(out var playerInventory)) return;
-
-		if (playerInventory.mainInventory.TryAddItem(data, stackSize))
+		if (!player.TryGetPlayerComponent<PlayerInventory>(out var playerInventory)) return false;
+		
+		if (playerInventory.inventories[Enums.InventoryType.HOTBAR].TryAddItem(data,amount != -1 ? amount : stackSize))
 		{
 			GD.Print($"Harvested: {data.ItemName}");
 			EmitSignal(SignalName.PickedUp, this, this.GlobalPosition);
 			this.QueueFree();
+			return true;
+		}
+		else if (playerInventory.inventories[Enums.InventoryType.MAIN].TryAddItem(data,amount != -1 ? amount : stackSize))
+		{
+			GD.Print($"Harvested: {data.ItemName}");
+			EmitSignal(SignalName.PickedUp, this, this.GlobalPosition);
+			this.QueueFree();
+			return true;
 		}
 		else
 		{
 			GD.Print("Can not add item to player inventory");
+			return false;
 		}
 	}
 	

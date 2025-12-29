@@ -1,0 +1,38 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cr27rx0ot6ptk"]
+
+[ext_resource type="Shader" uid="uid://36k5mr1s6ck6" path="res://Materials/Leaves.gdshader" id="1_dewcv"]
+[ext_resource type="Texture2D" uid="uid://cilfm0rjn0esj" path="res://AspriteFiles/leaves.png" id="2_dewcv"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_dewcv")
+shader_parameter/alpha_scissor_threshold = 0.4
+shader_parameter/specular = 0.4
+shader_parameter/roughness = 0.85
+shader_parameter/face_tint = 0.2
+shader_parameter/Leaf_Texture = ExtResource("2_dewcv")
+shader_parameter/Leaf_UV_Scale = Vector2(1.5, 1.5)
+shader_parameter/Leaf_Tint_Base = Color(0.8563307, 0.9957034, 0.946003, 1)
+shader_parameter/Leaf_Tint_Highlight = Color(3.946722e-06, 0.9817683, 0.5770931, 1)
+shader_parameter/Leaf_Tint_Str = 1.0
+shader_parameter/Texture_As_Brightness = false
+shader_parameter/Brightness = 8.0
+shader_parameter/Leaf_Emmisive_Color = Color(0.3667231, 0.70343935, 0.39108822, 1)
+shader_parameter/Leaf_Emissive_Str = 0.0
+shader_parameter/Trunk_UV_Scale = Vector2(1, 1)
+shader_parameter/Trunk_Tint = Color(0, 0, 0, 1)
+shader_parameter/Trunk_Tint_Str = 0.0
+shader_parameter/F_Texture_As_Brightness = false
+shader_parameter/F_Brightness = 8.0
+shader_parameter/frost_amount = 0.0
+shader_parameter/frost_fade = 1.0
+shader_parameter/Frost_Color = Color(1, 1, 1, 1)
+shader_parameter/Wind_Enable = false
+shader_parameter/wind_color_shift = Color(0, 0, 0, 1)
+shader_parameter/wind_color_strength = 0.5
+shader_parameter/wind_strength = 0.33
+shader_parameter/wind_direction_rads = 0.0
+shader_parameter/sway_multiplier = 2.0
+shader_parameter/jitter_multiplier = 2.0
+shader_parameter/deform_multiplier = 2.0
+shader_parameter/bend_multiplier = 2.0

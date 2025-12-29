@@ -4,25 +4,6 @@ using System;
 [GlobalClass]
 public partial class GameManager : Manager<GameManager>
 {
-	public static GameManager Instance { get; protected set; }
-	
-	public override void _EnterTree()
-	{
-		base._EnterTree();
-		if (Instance != null)
-		{
-			if (Instance != this)
-			{
-				GD.PrintErr("Only one instance of UIManager allowed, destroying self");
-				this.QueueFree();
-			}
-		}
-		else
-		{
-			Instance = this;
-		}
-	}
-
 	public override void _ExitTree()
 	{
 		base._ExitTree();
@@ -44,7 +25,9 @@ public partial class GameManager : Manager<GameManager>
 		{
 			if (child is ManagerBase manager)
 			{
+				GD.Print($"setting up manager: {manager.Name} ");
 				manager.SetupCall();
+				GD.Print($"Successfully setup manager: {manager.Name} ");
 			}
 		}
 		return;

@@ -19,6 +19,7 @@ public partial class PlayerInteraction : PlayerComponent
 
     public override void _PhysicsProcess(double delta)
     {
+	    if (!parentPlayer.IsSetup) return;
         HandleDropInput();
         ProcessInteractionDetection();
     }
@@ -63,28 +64,34 @@ public partial class PlayerInteraction : PlayerComponent
 
     private IInteractable ExtractInteractable(Node3D collider)
     {
-        // Case 1: The collider itself implements IInteractable
-        if (collider is IInteractable directInteractable)
-        {
-            return directInteractable;
-        }
+	    Node current = collider;
+	    
+	    while (current != null)
+	    {
+		    //Does this specific node implement the interface
+		    if (current is IInteractable interactable)
+		    {
+			    return interactable;
+		    }
 
-        // Case 2: The collider is a WorldItem that has an InteractableComponent
-        if (collider is WorldItem item &&
-            item.TryGetItemComponent<InteractalbleComponent>(out var component))
-        {
-            return component;
-        }
+		    //Is this node a WorldItem that contains an InteractableComponent
+		    if (current is WorldItem item && 
+		        item.TryGetItemComponent<InteractalbleComponent>(out var component))
+		    {
+			    return (IInteractable)component;
+		    }
 
-        return null;
+		    // Move up to the parent and try again
+		    current = current.GetParent();
+	    }
+
+	    return null;
     }
 
     private void HandleInteractionInput(IInteractable interactable, Node3D collider)
     {
-        // Using "interact" action if defined in Input Map, otherwise fallback to key
         if (Input.IsActionJustPressed("interact") || Input.IsPhysicalKeyPressed(interactionKey))
         {
-            // Pass the collider node if it's a WorldItem, otherwise null
             WorldItem interactionTarget = collider is WorldItem ? collider as WorldItem : null;
             interactable.Interact(parentPlayer, interactionTarget);
         }

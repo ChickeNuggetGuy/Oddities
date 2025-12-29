@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://mxlyna3eho23"
+path="res://.godot/imported/SM_Rock_Cluster_Large_05.obj-ec417461c5b9735b805e5926c05644a8.mesh"
+
+[deps]
+
+files=["res://.godot/imported/SM_Rock_Cluster_Large_05.obj-ec417461c5b9735b805e5926c05644a8.mesh"]
+
+source_file="res://Third-Party Assets/POLYGON Nature/OBJ/SM_Rock_Cluster_Large_05.obj"
+dest_files=["res://.godot/imported/SM_Rock_Cluster_Large_05.obj-ec417461c5b9735b805e5926c05644a8.mesh", "res://.godot/imported/SM_Rock_Cluster_Large_05.obj-ec417461c5b9735b805e5926c05644a8.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -3,6 +3,6 @@ using System;
 
 public interface IInteractable
 {
-	[Export] public Key InteracionKey { get; set; }
+	[Export] public Key InteractionKey { get; set; }
 	void Interact(Player  player, WorldItem parent);
 }

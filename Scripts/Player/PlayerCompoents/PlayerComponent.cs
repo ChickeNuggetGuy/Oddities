@@ -4,7 +4,8 @@ using System;
 public abstract partial class PlayerComponent : Node3D
 {
 	[Export] public Player parentPlayer;
-
+	[Export] public bool updateOnDayChanged = false;
+	
 	public override void _Ready()
 	{
 		base._Ready();
@@ -24,6 +25,15 @@ public abstract partial class PlayerComponent : Node3D
 	{
 		parentPlayer = parent;
 		Initialize(parent);
+		if (updateOnDayChanged)
+		{
+			DayManager.Instance.DayChanged += DayManagerOnDayChanged;
+		}
+	}
+
+	protected virtual void DayManagerOnDayChanged(int currentDay)
+	{
+		return;
 	}
 
 
@@ -31,4 +41,5 @@ public abstract partial class PlayerComponent : Node3D
 	{
 	
 	}
+	
 }

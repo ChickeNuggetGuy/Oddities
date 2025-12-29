@@ -20,13 +20,24 @@ public partial class Enums
 	}
 
 
+	public enum StatDayBehavior
+	{
+		NONE,
+		INCREMENT,
+		DECREMENT,
+		MIN,
+		MAX
+	}
+
 	public enum UIType
 	{
 		NONE,
 		ROOT,
 		INTERACTUI,
 		INVENTORYUI,
-		STATSUI
+		HOTBARUI,
+		STATSUI,
+		MOUSEHELDUI
 	}
 
 	public enum Season
@@ -36,5 +47,13 @@ public partial class Enums
 		FALL,
 		WINTER
 	}
-	
+
+
+	public enum InventoryType
+	{
+		NONE,
+		HOTBAR,
+		MAIN,
+		MOUSEHELD,
+	}
 }

@@ -1,9 +1,11 @@
 using Godot;
+using Godot.Collections;
 
 [GlobalClass]
 public partial class PlantableComponent : ItemComponent
 {
-	[Export] private Godot.Collections.Array<GrowthStage> stages = new();
+	[Export] private Array<GrowthStage> stages = new();
+	[Export] public Dictionary<Enums.StatType, double> plantingCost = new Dictionary<Enums.StatType, double>();
 	protected int currentStageIndex = 0;
 	protected int daysGrown = 0;
 
@@ -44,8 +46,9 @@ public partial class PlantableComponent : ItemComponent
 		}
 	}
 
-	public ItemData GetHarvestResult()
+	public Dictionary<ItemData, Variant> GetHarvestResult(out GrowthStage stage)
 	{
+		stage = stages[currentStageIndex];
 		if (IsMature)
 		{
 			return stages[currentStageIndex].HarvestResult;

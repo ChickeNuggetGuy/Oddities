@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://ds4x5awu1vafj" path="res://Scripts/Inventory/ItemData.cs" id="2_cdvdn"]
 [ext_resource type="Script" uid="uid://biqueljebpsgv" path="res://Scripts/Inventory/ItemComponents/PlantableComponent.cs" id="3_b5fe1"]
 [ext_resource type="ArrayMesh" uid="uid://cp1gck6i8bygh" path="res://Meshes/GrowthStage1_Sphere.res" id="4_7uxew"]
-[ext_resource type="Script" uid="uid://cswbr4j6fbxrs" path="res://Scripts/Farming System/GrowthStage.cs" id="5_0ktqa"]
+[ext_resource type="Script" uid="uid://cswbr4j6fbxrs" path="res://Scripts/Area System/Farming Area/GrowthStage.cs" id="5_0ktqa"]
 [ext_resource type="ArrayMesh" uid="uid://d23jl2nk8esrl" path="res://Meshes/GrowthStage2_Sphere_002.res" id="5_1ic34"]
 [ext_resource type="ArrayMesh" uid="uid://bjeute2tmsjqc" path="res://Meshes/GrowthStage3_Sphere_004.res" id="6_0ktqa"]
 [ext_resource type="Resource" uid="uid://h4yp0s4ajksh" path="res://Data/Items/TestItem.tres" id="8_1ic34"]
@@ -19,25 +19,43 @@ metadata/_custom_type_script = "uid://b60w6dsk03gfi"
 script = ExtResource("5_0ktqa")
 StageMesh = ExtResource("4_7uxew")
 DaysToGrow = 2
+HarvestResult = Dictionary[Object, int]({})
+harvestCost = Dictionary[int, float]({
+1: 5.0
+})
 metadata/_custom_type_script = "uid://cswbr4j6fbxrs"
 
 [sub_resource type="Resource" id="Resource_2hmgm"]
 script = ExtResource("5_0ktqa")
 StageMesh = ExtResource("5_1ic34")
 DaysToGrow = 1
-HarvestResult = ExtResource("8_1ic34")
+HarvestResult = Dictionary[Object, Variant]({
+null: Vector2i(1, 4)
+})
+harvestCost = Dictionary[int, float]({
+1: 10.0
+})
 metadata/_custom_type_script = "uid://cswbr4j6fbxrs"
 
 [sub_resource type="Resource" id="Resource_oaw25"]
+resource_local_to_scene = true
 script = ExtResource("5_0ktqa")
 StageMesh = ExtResource("6_0ktqa")
-DaysToGrow = 1
-HarvestResult = ExtResource("8_1ic34")
+HarvestResult = Dictionary[Object, Variant]({
+null: Vector2i(2, 4),
+ExtResource("8_1ic34"): Vector2i(1, 3)
+})
+harvestCost = Dictionary[int, float]({
+1: 15.0
+})
 metadata/_custom_type_script = "uid://cswbr4j6fbxrs"
 
 [sub_resource type="Resource" id="Resource_q6t48"]
 script = ExtResource("3_b5fe1")
 stages = Array[ExtResource("5_0ktqa")]([SubResource("Resource_waiy3"), SubResource("Resource_2hmgm"), SubResource("Resource_oaw25")])
+plantingCost = Dictionary[int, float]({
+1: 15.0
+})
 metadata/_custom_type_script = "uid://biqueljebpsgv"
 
 [resource]

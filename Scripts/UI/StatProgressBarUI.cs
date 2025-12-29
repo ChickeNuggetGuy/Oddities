@@ -9,7 +9,7 @@ public partial class StatProgressBarUI : UIElement
 	[Export] public ProgressBar progressBar;
 
 
-	public override void Initilize(UIWindow parent)
+	protected override void Initilize(UIWindow parent)
 	{
 		
 		base.Initilize(parent);

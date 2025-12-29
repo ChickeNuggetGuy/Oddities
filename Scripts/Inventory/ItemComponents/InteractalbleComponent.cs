@@ -1,10 +1,11 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 [GlobalClass]
 public partial class InteractalbleComponent : ItemComponent, IInteractable
 {
-	[Export] public Key InteracionKey { get; set; } = Key.E;
+	[Export] public Key InteractionKey { get; set; } = Key.E;
 	[Export] public Enums.InteractionBehavior InteractionBehavior = Enums.InteractionBehavior.PICKUP;
 
 	public override void Initialize()
@@ -19,6 +20,10 @@ public partial class InteractalbleComponent : ItemComponent, IInteractable
 
 	public void Interact(Player player, WorldItem parent)
 	{
+		if (!player.TryGetPlayerComponent<PlayerStatHolder>(out var playerStatHolder))
+		{
+			return;
+		}
 		switch (InteractionBehavior)
 		{
 			case Enums.InteractionBehavior.HARVEST:
@@ -26,10 +31,39 @@ public partial class InteractalbleComponent : ItemComponent, IInteractable
 				{
 					if (plantable.IsMature)
 					{
-						ItemData result = plantable.GetHarvestResult();
-						if (result != null)
+						Dictionary<ItemData, Variant> result = plantable.GetHarvestResult(out var growthStage);
+
+						if (!playerStatHolder.TrySpendStatCost(growthStage.harvestCost))
 						{
-							parent.Pickup(player, result);
+							return;
+						}
+			
+						if (result != null && result.Count > 0)
+						{
+							foreach (var itemKVP in result)
+							{
+								int amount = 1;
+								switch (itemKVP.Value.VariantType)
+								{
+									case Variant.Type.Int:
+										amount = itemKVP.Value.AsInt32();
+										break;
+									case Variant.Type.Vector2I:
+										Vector2I range = itemKVP.Value.AsVector2I();
+										amount = GD.RandRange(range.X, range.Y);
+										break;
+									default:
+										GD.Print("Variant type not implemented");
+										continue;
+								}
+								
+								if (!parent.TryGiveItemToPlayer(player, itemKVP.Key, amount))
+								{
+									//Pickup failed, drop item on floor
+									//TODO: Drop item on floor
+								}
+								
+							}
 						}
 					}
 					else
@@ -44,7 +78,7 @@ public partial class InteractalbleComponent : ItemComponent, IInteractable
 				{
 					player.TryGetPlayerComponent<PlayerInventory>(out var playerInventory);
 
-					parent.Pickup(player, parent.itemData);
+					parent.TryGiveItemToPlayer(player, parent.itemData);
 
 				}
 

@@ -22,6 +22,8 @@ public partial class FPSController : PlayerComponent
 
     public override void _Input(InputEvent @event)
     {
+	    if(InputManager.Instance.InputBlocked) return;
+	    
         if (parentPlayer == null) return;
 
         if (@event is InputEventMouseMotion mouseMotion)
@@ -60,6 +62,7 @@ public partial class FPSController : PlayerComponent
 		    velocity.Y -= _gravity * (float)delta;
 	    }
 	    
+	    if(InputManager.Instance.InputBlocked) return;
 	    if (Input.IsActionJustPressed("jump") && parentPlayer.IsOnFloor())
 	    {
 		    velocity.Y = _jumpVelocity;

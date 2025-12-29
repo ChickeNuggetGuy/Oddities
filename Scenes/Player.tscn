@@ -10,14 +10,40 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpjcp"]
 
-[sub_resource type="Resource" id="Resource_dtqjt"]
+[sub_resource type="Resource" id="Resource_megsn"]
 script = ExtResource("5_tdg3f")
+_maxItemSlots = 10
+metadata/_custom_type_script = "uid://b54fa5fqrb45u"
+
+[sub_resource type="Resource" id="Resource_yoq75"]
+script = ExtResource("5_tdg3f")
+_maxItemSlots = 48
 metadata/_custom_type_script = "uid://b54fa5fqrb45u"
 
 [sub_resource type="Resource" id="Resource_5ncpa"]
 script = ExtResource("7_dtqjt")
 currentValue = 100.0
 range = Vector2i(0, 100)
+dayChangedBehavior = 4
+signalOnMin = true
+metadata/_custom_type_script = "uid://3xiv56vkfxl8"
+
+[sub_resource type="Resource" id="Resource_52ee3"]
+script = ExtResource("7_dtqjt")
+statType = 1
+currentValue = 100.0
+range = Vector2i(0, 100)
+dayChangedBehavior = 4
+signalOnMin = true
+metadata/_custom_type_script = "uid://3xiv56vkfxl8"
+
+[sub_resource type="Resource" id="Resource_bhhdu"]
+script = ExtResource("7_dtqjt")
+statType = 2
+range = Vector2i(0, 5)
+dayChangedBehavior = 1
+incrementAmount = 0.2
+incrementRate = 1.0
 signalOnMin = true
 metadata/_custom_type_script = "uid://3xiv56vkfxl8"
 
@@ -38,16 +64,23 @@ metadata/_custom_type_script = "uid://dhxgsdjg8r2vs"
 
 [node name="PlayerInventory" type="Node3D" parent="." unique_id=1032175699 node_paths=PackedStringArray("parentPlayer")]
 script = ExtResource("4_cxr5p")
-mainInventory = SubResource("Resource_dtqjt")
+inventories = Dictionary[int, ExtResource("5_tdg3f")]({
+1: SubResource("Resource_megsn"),
+2: SubResource("Resource_yoq75")
+})
+areaDetectionMask = 8
 parentPlayer = NodePath("..")
 metadata/_custom_type_script = "uid://b5vx311oyjhrm"
 
 [node name="PlayerStatHolder" type="Node3D" parent="." unique_id=558677624 node_paths=PackedStringArray("parentPlayer")]
 script = ExtResource("6_tdg3f")
 stats = Dictionary[int, Object]({
-0: SubResource("Resource_5ncpa")
+0: SubResource("Resource_5ncpa"),
+1: SubResource("Resource_52ee3"),
+2: SubResource("Resource_bhhdu")
 })
 parentPlayer = NodePath("..")
+updateOnDayChanged = true
 metadata/_custom_type_script = "uid://bp24b3b4m8ldo"
 
 [node name="FPSController" type="Node3D" parent="." unique_id=1288462412 node_paths=PackedStringArray("_headPivot", "_camera", "parentPlayer") groups=["Player"]]

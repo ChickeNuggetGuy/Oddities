@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cpjysq3wkerro"
+path="res://.godot/imported/SM_Prop_Fence_02.obj-961a83abfef89d3d728ec34d9d5c8f1f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/SM_Prop_Fence_02.obj-961a83abfef89d3d728ec34d9d5c8f1f.mesh"]
+
+source_file="res://Third-Party Assets/POLYGON Nature/OBJ/SM_Prop_Fence_02.obj"
+dest_files=["res://.godot/imported/SM_Prop_Fence_02.obj-961a83abfef89d3d728ec34d9d5c8f1f.mesh", "res://.godot/imported/SM_Prop_Fence_02.obj-961a83abfef89d3d728ec34d9d5c8f1f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

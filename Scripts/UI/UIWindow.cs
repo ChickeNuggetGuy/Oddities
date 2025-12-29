@@ -10,13 +10,13 @@ public partial class UIWindow : UIElement
     [Export] private bool startHidden = true;
     [Export] private Key toggleKey;
     [Export] private Control visual;
-
+    [Export] protected bool blockInput = false;
+    [Export] public bool showMouse = false;
     public Array<UIElement> uiChildren = new Array<UIElement>();
 
-    public override void Initilize(UIWindow parent)
+    protected override void Initilize(UIWindow parent)
     {
         uiChildren.Clear();
-        // Start searching through the scene tree nodes under this window
         DiscoverUIElements(this);
 
         if (startHidden)
@@ -39,28 +39,38 @@ public partial class UIWindow : UIElement
 	
     private void DiscoverUIElements(Node root)
     {
-        foreach (Node child in root.GetChildren())
-        {
-            if (child is UIElement uiElem)
-            {
-                uiElem.InitilizeCall(this);
-                uiChildren.Add(uiElem);
-                
-                if (uiElem is UIWindow)
-                {
-                    continue;
-                }
-            }
-
-
-            DiscoverUIElements(child);
-        }
+	    foreach (Node child in root.GetChildren())
+	    {
+		    if (child is UIElement uiElem)
+		    {
+			    uiElem.InitilizeCall(this);
+			    uiChildren.Add(uiElem);
+            
+			    if (uiElem is UIWindow)
+			    {
+				    continue;
+			    }
+		    }
+		    
+		    DiscoverUIElements(child); 
+	    }
     }
 
     public void ShowCall()
     {
-        if (IsShown) return;
-        IsShown = true;
+	    if (IsShown) return;
+	    IsShown = true;
+
+
+	    if (showMouse)
+	    {
+		    InputManager.Instance.ChangeMouseMode(Input.MouseModeEnum.Confined);
+	    }
+	    
+		if (blockInput)
+        {
+	        UIManager.Instance.TryBlockInput(this);
+        }
         visual?.Show();
         Show();
     }
@@ -69,11 +79,34 @@ public partial class UIWindow : UIElement
 
     public void HideCall()
     {
-        if (!IsShown) return;
         IsShown = false;
-        visual?.Hide();
+        visual.Hide();
+
+        if (showMouse)
+        {
+	        InputManager.Instance.ChangeMouseMode(Input.MouseModeEnum.Captured);
+        }
+        
+        if (blockInput)
+        {
+	        UIManager.Instance.UnblockInput(this);
+        }
         Hide();
     }
 
     protected virtual void Hide() { }
+
+    public void Toggle()
+    {
+	    if (IsShown) HideCall();
+	    else ShowCall();
+    }
+    public override void _Input(InputEvent @event)
+    {
+	    base._Input(@event);
+	    if (@event is InputEventKey eventKey && eventKey.Pressed && eventKey.Keycode == toggleKey)
+	    {
+		    Toggle();
+	    }
+    }
 }

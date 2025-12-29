@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cnfr3ei58kqq2"
+path="res://.godot/imported/SM_Plant_Mushrooms_05.obj-6352b29a891d89b3c8db510aad18bda3.mesh"
+
+[deps]
+
+files=["res://.godot/imported/SM_Plant_Mushrooms_05.obj-6352b29a891d89b3c8db510aad18bda3.mesh"]
+
+source_file="res://Third-Party Assets/POLYGON Nature/OBJ/SM_Plant_Mushrooms_05.obj"
+dest_files=["res://.godot/imported/SM_Plant_Mushrooms_05.obj-6352b29a891d89b3c8db510aad18bda3.mesh", "res://.godot/imported/SM_Plant_Mushrooms_05.obj-6352b29a891d89b3c8db510aad18bda3.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

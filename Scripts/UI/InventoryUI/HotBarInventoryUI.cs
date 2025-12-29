@@ -2,16 +2,9 @@ using Godot;
 using System;
 using Godot.Collections;
 
-public partial class HotBarInventoryUI : UIWindow
+[GlobalClass]
+public partial class HotBarInventoryUI : InventoryUI
 {
-	[Export]public Player player;
-	[Export] public int itemSlotCount = 1;
-	private ItemSlot[] itemSlots;
-	
-	[Export] private PackedScene itemSlotScene;
-	[Export] private Control slotHolder;
-	
-	
 	private ulong _lastScrollTime = 0;
 	[Export] public ulong scrollCooldownMs = 100;
 	
@@ -45,10 +38,6 @@ public partial class HotBarInventoryUI : UIWindow
 		}
 	}
 
-	private void PlayerInventoryOnInventoryChanged(Inventory inventory)
-	{
-		UpdateItemSlots(inventory);
-	}
 
 	public override void _Input(InputEvent @event)
 	{
@@ -92,49 +81,6 @@ public partial class HotBarInventoryUI : UIWindow
 	}
 
 	
-	private void PrepareUI()
-	{
-
-		
-		// Clear existing  children
-		foreach (var child in slotHolder.GetChildren())
-		{
-			child.QueueFree();
-		}
-
-		itemSlots = new ItemSlot[itemSlotCount];
-		
-		for (int i = 0; i < itemSlotCount; i++)
-		{
-			ItemSlot slot = itemSlotScene.Instantiate<ItemSlot>();
-			slotHolder.AddChild(slot);
-			itemSlots[i] = slot;
-			slot.SetCurrentItem(null, 0);
-            
-			// Set initial visual state for selection
-			slot.slotButton.Flat = (i == selectedSlotIndex);
-		}
-	}
-
-	public override void Initilize(UIWindow parent)
-	{
-		base.Initilize(parent);
-		
-		if (player != null)
-		{
-			if (!player.TryGetPlayerComponent<PlayerInventory>(out var playerInventory))
-			{
-				return;
-			}
-			else
-			{
-				playerInventory.mainInventory.InventoryChanged += PlayerInventoryOnInventoryChanged;
-			}
-		}
-		PrepareUI();
-	}
-
-
 	private int GetNextSlotIndex(bool wheelUp)
 	{
 		int currentIndex = selectedSlotIndex;
@@ -162,7 +108,6 @@ public partial class HotBarInventoryUI : UIWindow
 	}
 	
 	
-
 	public void SetSelectedSlotIndex(int slotIndex)
 	{
 		if (slotIndex < 0 || slotIndex >= itemSlots.Length) return;
@@ -174,44 +119,16 @@ public partial class HotBarInventoryUI : UIWindow
 		itemSlots[selectedSlotIndex].SetSelected(true);
 	}
 
-	public void UpdateItemSlots(Inventory inventory)
+	protected override void PrepareUI()
 	{
-		// Reset all slots to null first to handle removed items
-		for (int i = 0; i < itemSlots.Length; i++)
+		base.PrepareUI();
+		
+		
+		for (int i = 0; i < itemSlotCount; i++)
 		{
-			itemSlots[i].SetCurrentItem(null,0);
-		}
-
-		int index = 0;
-		foreach (var inventoryItem in inventory.Items)
-		{
-			if (index >= itemSlots.Length) break;
+			ItemSlot slot = itemSlots[i];
 			
-			if (InventoryManager.Instance.TryGetItemByName(inventoryItem.Key, out var itemData))
-			{
-				itemSlots[index].SetCurrentItem(itemData, inventoryItem.Value);
-			}
-			else
-			{
-				itemSlots[index].SetCurrentItem(null, 0);
-			}
-			
-			index++;
+			slot.slotButton.Flat = (i == selectedSlotIndex);
 		}
-	}
-
-
-	public void UpdateorCreateItemSlot(ItemData item, int count, int slotIndex)
-	{
-		ItemSlot slot = itemSlotScene.Instantiate() as ItemSlot;
-
-		if (slot == null)
-		{
-			GD.Print("item slot instance null!");
-			return;
-		}
-		itemSlots[slotIndex] = slot;
-		slotHolder.AddChild(slot);
-		slot.SetCurrentItem(item, count);
 	}
 }

@@ -12,7 +12,7 @@ public partial class UIElement : Control
 		Initilize(parent);
 	}
 
-	public virtual void Initilize(UIWindow parent)
+	protected virtual void Initilize(UIWindow parent)
 	{
 
 	}

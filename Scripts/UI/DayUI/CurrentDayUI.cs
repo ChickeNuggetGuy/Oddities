@@ -7,7 +7,7 @@ public partial class CurrentDayUI : UIWindow
 	[Export] private TextureProgressBar dayProgressBar;
 
 
-	public override void Initilize(UIWindow parent)
+	protected override void Initilize(UIWindow parent)
 	{
 		base.Initilize(parent);
 		DayManager.Instance.TimeChanged += DayManagerOnTimeChanged;
@@ -25,8 +25,8 @@ public partial class CurrentDayUI : UIWindow
 
 	private void UpdateUI(int currentDay = -1, int hour = -1, int minute = -1)
 	{
-		String newTimeText = $"Current Day: {currentDay}\n {hour}:{minute}";
-		currentDayLabel.Text = newTimeText;
+		String newTimeText = $"Current Day: ";
+		currentDayLabel.Text =newTimeText + DayManager.Instance.GetFormattedTime();
 
 	}
 }
